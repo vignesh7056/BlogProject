@@ -10,40 +10,56 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.Model.UserModel;
+import com.blog.blog.Services.UserService;
 import com.blog.blog.Services.UserServiceImpl;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserServiceImpl userServiceimplobj;
+    private UserService userService;
+
+    @PostMapping("/signup")
+    public UserModel signUp(@RequestBody UserModel user){
+        return userService.signUp(user);
+    }
+
+
+    @PostMapping("/signin")
+    public boolean signin(@RequestParam String username, @RequestParam String password){
+        return userService.signin(username, password);
+    }
+
+
+
 
     @GetMapping("/all")
     public List<UserModel>getAllUsers(){
-        return userServiceimplobj.findAll();
+        return userService.findAll();
     }
 
     @GetMapping("/id/{id}")
     public UserModel getUsersById(@PathVariable String id){
-        return userServiceimplobj.findById(id);
+        return userService.findById(id);
     }
 
     @PostMapping("/create")
     public UserModel generate(@RequestBody UserModel user){
-        return userServiceimplobj.create(user);
+        return userService.create(user);
     }
 
     @PutMapping("/update")
     public UserModel edit(@RequestBody UserModel user){
-        return userServiceimplobj.update(user);
+        return userService.update(user);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable String id){
-        userServiceimplobj.delete(id);
+        userService.delete(id);
     }
 
 }

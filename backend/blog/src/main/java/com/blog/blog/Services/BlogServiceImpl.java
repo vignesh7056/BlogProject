@@ -1,7 +1,6 @@
 package com.blog.blog.Services;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,28 +14,42 @@ import com.blog.blog.Repository.BlogRepository;
 public class BlogServiceImpl implements BlogService{
     @Autowired
     private BlogRepository blogrepoobject;
-    private Integer like;
+
     @Override
-    public BlogModel create(BlogModel blogmodelobj){
-        blogmodelobj.setDate(new Date());
-        blogmodelobj.setLike(like);
+    public BlogModel createBlog(BlogModel blogmodelobj){
+        int size = getAllBlogs().size();
+        blogmodelobj.set_id("BN"+ String.format("%03d",(size+1)) );
         return blogrepoobject.save(blogmodelobj);
     }
+
    @Override
-   public List<BlogModel> findAll(){
+   public List<BlogModel>getAllBlogs(){
     return blogrepoobject.findAll();
    }
-@Override
-   public void delete(String id){
-    blogrepoobject.deleteById(id);
-}
-@Override
-public BlogModel update(BlogModel blogmodelobj){
-    return blogrepoobject.save(blogmodelobj);
-}
 
-@Override
-public BlogModel findById(String id) {
-    return blogrepoobject.findById(id).get();
-}
+   
+
+    @Override
+    public BlogModel updateBlog(BlogModel blogmodelobj){
+        BlogModel blog = getBlogById(blogmodelobj.get_id());
+        blog.setTitle(blogmodelobj.getTitle());
+        blog.setContent(blogmodelobj.getContent());
+        blog.setUsername(blogmodelobj.getUsername());
+        return blogrepoobject.save(blog);
+    }
+
+    @Override
+    public List<BlogModel> getBlogByUsername(String username) {
+      return blogrepoobject.findByUsername(username);
+    }
+
+    public BlogModel getBlogById(String id) {
+        return blogrepoobject.findById(id).get();
+    }
+
+    @Override
+    public void deleteById(String id){
+      blogrepoobject.deleteById(id);
+  }
+
 }

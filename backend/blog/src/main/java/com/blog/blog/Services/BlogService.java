@@ -6,12 +6,14 @@ import com.blog.blog.Model.BlogModel;
 
 public interface BlogService {
     
-    BlogModel create(BlogModel blogmodelobj);
+    List<BlogModel>getAllBlogs();
 
-    List<BlogModel>findAll();
+    BlogModel createBlog(BlogModel blogmodelobj);
 
-    void delete(String id);
+    BlogModel updateBlog(BlogModel blogmodelobj);
 
-    BlogModel update(BlogModel blogmodelobj);
-    BlogModel findById(String id);
+    List<BlogModel> getBlogByUsername(String username);
+
+    void deleteById(String id);
+
 }

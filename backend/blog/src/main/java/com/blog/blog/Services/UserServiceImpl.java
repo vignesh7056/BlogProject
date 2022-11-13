@@ -7,8 +7,42 @@ import com.blog.blog.Model.UserModel;
 import com.blog.blog.Repository.UserRepository;
 @Component
 public class UserServiceImpl implements UserService {
-@Autowired
-private UserRepository userrepositoryobj;
+    @Autowired
+    private UserRepository userrepositoryobj;
+
+    public UserModel signUp(UserModel user){
+        UserModel response = new UserModel();
+        if(!user.getEmail().isEmpty() && !user.getPassword().isEmpty() & !user.getName().isEmpty() ){
+          user.set_id("UN"+ String.format("%03d",(userList().size()+1)) );
+          response = userrepositoryobj.save(user);
+        }
+        return response;
+    }
+
+    private List<UserModel> userList(){
+        return userrepositoryobj.findAll();
+    }
+
+    public boolean signin(String username, String password){
+        boolean valid = false;
+        if(username!=""){
+            List<UserModel> user = userrepositoryobj.findByEmail(username);
+            if(user.size()>0){
+                if(user.stream().findFirst().get().getPassword().equals(password)){
+                    valid=true;
+                }
+            }    
+        }
+        return valid;
+    }
+
+
+
+
+
+
+
+
     @Override
      public UserModel create(UserModel user) {
         return userrepositoryobj.save(user);
@@ -43,3 +77,4 @@ private UserRepository userrepositoryobj;
     
     
 }
+
