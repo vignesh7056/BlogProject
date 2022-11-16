@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.Model.BlogModel;
 import com.blog.blog.Services.BlogService;
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/blog")
 
@@ -57,5 +57,10 @@ public class BlogController {
     public BlogModel findblog(@PathVariable String id){
         // System.out.println("fejvnjekvfen " + id);
       return blogserviceobj.findblog(id);
+    }
+    @PostMapping("/add")
+    public BlogModel addblog(@RequestBody BlogModel blogmodelobj){
+        return blogserviceobj.addblog(blogmodelobj);
+        
     }
 }

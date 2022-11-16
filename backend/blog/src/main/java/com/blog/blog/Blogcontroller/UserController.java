@@ -18,7 +18,7 @@ import com.blog.blog.Model.UserModel;
 import com.blog.blog.Services.UserService;
 // import com.blog.blog.Services.UserServiceImpl;
 
-@CrossOrigin(origins = "http://localhost:3001")  // to prevent cross orgin error.
+@CrossOrigin(origins = "http://localhost:3000")  // to prevent cross orgin error.
 @RestController
 @RequestMapping("/user")
 public class UserController {

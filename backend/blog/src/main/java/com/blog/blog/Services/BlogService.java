@@ -22,7 +22,7 @@ public interface BlogService {
 
      BlogModel fetchBlogById(String id);
      BlogModel findblog(String id);   //findblog by id
-
+     BlogModel addblog(BlogModel blogmodelobj);
     // Object findById(String id);
 
 }

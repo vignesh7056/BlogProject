@@ -23,11 +23,17 @@ public class BlogModel {
     private String content;
     @NotBlank
     private String username;
-    private Date date = new Date();
+    // private Date date = new Date();
     private boolean like;
     private boolean unlike;
     private List<String> likedUsers;
-    private List<String> unlikedUsers;  
+    private List<String> unlikedUsers;
+    private String setId;
+    private Date date;
+    
+    
+    
+      
 }
 
 

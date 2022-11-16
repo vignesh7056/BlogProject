@@ -1,6 +1,7 @@
 package com.blog.blog.Services;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,12 +12,17 @@ import org.springframework.stereotype.Component;
 
 
 import com.blog.blog.Model.BlogModel;
+import com.blog.blog.Model.PreviousId;
 import com.blog.blog.Repository.BlogRepository;
+import com.blog.blog.Repository.PreviousIdRepository;
 @Component
 
 public class BlogServiceImpl implements BlogService{
+  
     @Autowired
     private BlogRepository blogrepoobject;
+    @Autowired
+    private PreviousIdRepository previousidrepositoryobject;
 
     @Override
     public BlogModel createBlog(BlogModel blogmodelobj){
@@ -80,5 +86,25 @@ public class BlogServiceImpl implements BlogService{
     //   // TODO Auto-generated method stub
     //   return null;
     // }
+    @Override
+    public BlogModel addblog(BlogModel blogmodelobj)
+    {
+      PreviousId PreviousIdModel = previousidrepositoryobject.findByType( "blog");
+      Integer PreviousBlogId = PreviousIdModel.getPreviousId();
+
+      if(PreviousBlogId < 9){
+      blogmodelobj.set_id("BN00"+ ++PreviousBlogId);
+     }
+     else{
+      blogmodelobj.set_id("BN0" + ++PreviousBlogId);
+     }
+     PreviousIdModel.setPreviousId(PreviousBlogId);
+     previousidrepositoryobject.save(PreviousIdModel);
+     blogmodelobj.setDate(new Date());
+     blogmodelobj.setLike(true);
+     return blogrepoobject.save(blogmodelobj);
+    }
+    
+
 
 }

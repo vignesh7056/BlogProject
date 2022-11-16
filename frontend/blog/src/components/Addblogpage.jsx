@@ -25,7 +25,8 @@ function Addblogpage() {
 console.log(data)
         axios({
           method: "post",
-          url: "/blog/create",
+          url: "/blog/add",
+        //  url: "/blog/create",
           data: data,
         }).then((response) => {
           if (response.data) {
