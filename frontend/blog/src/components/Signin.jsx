@@ -1,18 +1,87 @@
-import React from 'react'
+
 //import Navbar from './Navbar'
-import { Link } from 'react-router-dom';
-import { MDBContainer } from 'mdb-react-ui-kit';
+
+
 import { MDBCol, MDBRow, } from 'mdb-react-ui-kit';
-// export default class Login extends Component {
-function Signin() {
+
+import axios from '../Axios';
+
+
+import Constants from "../constants.json";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
+function Signin({setrefresh}) {
+  
+  const navigate = useNavigate();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value.trim();
+   
+    if (email && password){
+      const data ={email, password};
+      axios({
+        method: "post",
+        url: "/user/signin",
+        data: data,
+      })
+        .then((response) => {
+          if (response.data) {
+            console.log(response.data);
+
+
+            localStorage.setItem(
+              Constants.LOCALSTORAGE_TOKEN_ISLOGGEDIN,
+              JSON.stringify(true)
+            );
+
+            localStorage.setItem(
+              Constants.LOCALSTORAGE_TOKEN_USERID,
+              response.data._id
+            );
+
+            localStorage.setItem(
+              Constants.LOCALSTORAGE_TOKEN_USERNAME,
+              response.data.name
+            );
+
+            localStorage.setItem(
+              Constants.LOCALSTORAGE_TOKEN_USER_ROLE,
+              response.data.role
+            );
+             console.log("backend", response.data.role);
+             console.log("const",Constants.USERTYPE_ADMIN );
+
+             setrefresh()
+            if (response.data.role === Constants.USERTYPE_ADMIN) {
+              navigate("/Admin");
+            } else {
+             
+              navigate("/Blogfeed");
+            }
+          } else {
+
+            
+            // localStorage.clear();
+          }
+        })
+        .catch((err) => {
+          console.log("Error" + err);
+        });
+    }
+  };
+    
+  
   return (
     <div>
-    {/* // <div className="border d-flex align-items-center justify-content-center">
-    //   <MDBContainer align center> */}
+    
     <MDBRow className='d-flex justify-content-center'>
     <MDBCol md='6' className='bg-secondary mt-5 text-white'>
-      {/* <Navbar /> */}
-    <form>
+
+    <form className="login-form" onSubmit={handlesubmit}>
       <h3>Sign In</h3>
       <div className="mb-3">
         <label>Email address</label>
@@ -20,14 +89,20 @@ function Signin() {
           type="email"
           className="form-control"
           placeholder="Enter email"
+          id="email"
+          required={true}
+          ref={emailRef}
         />
       </div>
       <div className="mb-3">
         <label>Password</label>
         <input
+         id="password"
           type="password"
           className="form-control"
           placeholder="Enter password"
+          required={true}
+          ref={passwordRef}
         />
       </div>
       <div className="mb-3">
@@ -48,13 +123,13 @@ function Signin() {
         </button>
       </div>
       <p class="url-dark">"dont have an account"
-      {/* <p className="dont have an account"> */}
+
         <a href={'/Signup'}>i dont have an account</a>
       </p>
       
-      <p className="forgot-password text-right">
+      {/* <p className="forgot-password text-right">
         Forgot <a href="">password?</a>
-      </p>
+      </p> */}
     </form>
      {/* </MDBContainer> */}
      </MDBCol>

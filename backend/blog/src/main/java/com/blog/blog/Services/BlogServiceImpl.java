@@ -2,8 +2,11 @@ package com.blog.blog.Services;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 
 
@@ -24,7 +27,8 @@ public class BlogServiceImpl implements BlogService{
 
    @Override
    public List<BlogModel>getAllBlogs(){
-    return blogrepoobject.findAll();
+    return blogrepoobject.findAll(Sort.by(Direction.DESC, "date"));
+    // return blogrepoobject.findAll();
    }
 
    
@@ -42,14 +46,39 @@ public class BlogServiceImpl implements BlogService{
     public List<BlogModel> getBlogByUsername(String username) {
       return blogrepoobject.findByUsername(username);
     }
-
-    public BlogModel getBlogById(String id) {
+    
+    
+     @Override
+     public BlogModel getBlogById(String id) {
         return blogrepoobject.findById(id).get();
+       // return blogrepoobject.findById(id).get();
     }
 
     @Override
     public void deleteById(String id){
       blogrepoobject.deleteById(id);
   }
+  @Override
+  public BlogModel findblog(String id) {   //find blog by id
+    Optional<BlogModel> optionalBlog = blogrepoobject.findById(id);
+    if (!optionalBlog.isPresent())
+    return null;
+
+    return optionalBlog.get();
+    //return optionalBlog.get();
+}
+// 
+
+  @Override
+  public BlogModel fetchBlogById(String id) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+    // @Override
+    // public Object findById(String id) {
+    //   // TODO Auto-generated method stub
+    //   return null;
+    // }
 
 }

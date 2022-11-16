@@ -1,0 +1,11 @@
+{
+    "AVATAR_URL": "https://ui-avatars.com/api/?name=vignesh&length=1&background=random&bold=true",
+    "LOCALSTORAGE_TOKEN_ISLOGGEDIN": "isLoggedIn",
+    "LOCALSTORAGE_TOKEN_USERID": "userId",
+    "LOCALSTORAGE_TOKEN_USERNAME": "userName",
+    "LOCALSTORAGE_TOKEN_USER_ROLE": "userRole",
+    "USERTYPE_ADMIN":"admin"
+    
+
+  }
+  

@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
     public UserModel signUp(UserModel user){
         UserModel response = new UserModel();
         if(!user.getEmail().isEmpty() && !user.getPassword().isEmpty() & !user.getName().isEmpty() ){
+        //   user.set_id("UN"+ String.format("%03d",(userList().size()+1)) );
           user.set_id("UN"+ String.format("%03d",(userList().size()+1)) );
           response = userrepositoryobj.save(user);
         }
@@ -23,17 +24,23 @@ public class UserServiceImpl implements UserService {
         return userrepositoryobj.findAll();
     }
 
-    public boolean signin(String username, String password){
-        boolean valid = false;
-        if(username!=""){
-            List<UserModel> user = userrepositoryobj.findByEmail(username);
-            if(user.size()>0){
-                if(user.stream().findFirst().get().getPassword().equals(password)){
-                    valid=true;
-                }
-            }    
-        }
-        return valid;
+    // public boolean signin(String email, String password){
+    //     boolean valid = false;
+    //     if(email!=""){
+    //         List<UserModel> user = userrepositoryobj.findByEmail(email);
+    //         if(user.size()>0){
+    //             if(user.stream().findFirst().get().getPassword().equals(password)){
+    //                 valid=true;
+    //             }
+    //         }    
+    //     }
+    //     return valid;
+    // }
+    public UserModel signin(UserModel user) {
+        UserModel userobj = userrepositoryobj.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        if (userobj == null)
+            return null;
+        return userobj;
     }
 
 

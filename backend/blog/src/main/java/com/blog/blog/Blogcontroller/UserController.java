@@ -3,6 +3,7 @@ package com.blog.blog.Blogcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.Model.UserModel;
 import com.blog.blog.Services.UserService;
-import com.blog.blog.Services.UserServiceImpl;
+// import com.blog.blog.Services.UserServiceImpl;
 
+@CrossOrigin(origins = "http://localhost:3001")  // to prevent cross orgin error.
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -28,14 +30,19 @@ public class UserController {
         return userService.signUp(user);
     }
 
-
     @PostMapping("/signin")
-    public boolean signin(@RequestParam String username, @RequestParam String password){
-        return userService.signin(username, password);
+    public UserModel signin(@RequestBody UserModel user) {
+        return userService.signin(user);
     }
+    // @PostMapping("/signin")
+    // public boolean signin(@RequestBody String email, @RequestBody String password){
+    //     return userService.signin(email, password);
+    // }
 
-
-
+    // @PostMapping("/signin")
+    // public boolean signin(@RequestParam String email, @RequestParam String password){
+    //     return userService.signin(email, password);
+    // }
 
     @GetMapping("/all")
     public List<UserModel>getAllUsers(){

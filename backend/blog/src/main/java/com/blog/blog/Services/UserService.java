@@ -6,8 +6,9 @@ public interface UserService {
 
      UserModel signUp(UserModel user);
 
-     boolean signin(String username, String password);
-
+    //  boolean signin(String email, String password);
+   
+    UserModel signin(UserModel user);
 
 
     UserModel create (UserModel usermodelobj);
@@ -19,5 +20,6 @@ public interface UserService {
     void delete(String id);
 
     UserModel update(UserModel usermodelobj);
+    
 
 }

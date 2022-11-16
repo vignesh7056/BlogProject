@@ -8,14 +8,14 @@ import { useEffect } from 'react';
 import axios from '../Axios';
 import { useState } from 'react';
 
-function Profilepage() {
+function Clientpage() {
   const [blog, setblogs] = useState([]);
   const username = localStorage.getItem("userName");
  const [refresh, setrefresh] = useState(false);
   useEffect(() => {
     
     axios
-      .get(`/blog/${username}`)
+      .get(`/blog`)
       .then((response) => setblogs(response.data))
       .catch((err) => console.log("Error " + err));
       console.log(blog);
@@ -77,4 +77,4 @@ function Profilepage() {
   )
 }
 
-export default Profilepage;
+export default Clientpage;

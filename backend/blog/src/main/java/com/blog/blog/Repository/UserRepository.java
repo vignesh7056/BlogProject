@@ -12,4 +12,6 @@ import com.blog.blog.Model.UserModel;
 public interface UserRepository extends MongoRepository<UserModel, String> {
    
   List<UserModel> findByEmail(String email);
+
+UserModel findByEmailAndPassword(String email, String password);
 }

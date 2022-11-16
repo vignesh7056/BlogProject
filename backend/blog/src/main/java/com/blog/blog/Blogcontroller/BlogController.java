@@ -1,6 +1,7 @@
 package com.blog.blog.Blogcontroller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blog.Model.BlogModel;
 import com.blog.blog.Services.BlogService;
+@CrossOrigin(origins = "http://localhost:3001")
 @RestController
 @RequestMapping("/blog")
 
@@ -24,7 +26,7 @@ public class BlogController {
     public List<BlogModel>getAllBlogs(){
        return blogserviceobj.getAllBlogs();
     }
-
+   
     @PostMapping("/create")
     public BlogModel make(@RequestBody BlogModel blogmodelobj){
     return blogserviceobj.createBlog(blogmodelobj);
@@ -42,8 +44,18 @@ public class BlogController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public void deleteById(@PathVariable String id){
         blogserviceobj.deleteById(id);
+    }
+    /////////
+    // @GetMapping("/blogdata/{id}")
+    // public BlogModel getBlogById(@PathVariable String id ){
+    //     return blogserviceobj.getBlogById(id);
+    // }
+    @GetMapping("/blogdata/id/{id}")
+    public BlogModel findblog(@PathVariable String id){
+        // System.out.println("fejvnjekvfen " + id);
+      return blogserviceobj.findblog(id);
     }
 }
