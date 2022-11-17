@@ -24,17 +24,17 @@ public class BlogServiceImpl implements BlogService{
     @Autowired
     private PreviousIdRepository previousidrepositoryobject;
 
-    @Override
-    public BlogModel createBlog(BlogModel blogmodelobj){
-        int size = getAllBlogs().size();
-        blogmodelobj.set_id("BN"+ String.format("%03d",(size+1)) );
-        return blogrepoobject.save(blogmodelobj);
-    }
+    // @Override
+    // public BlogModel createBlog(BlogModel blogmodelobj){
+    //     int size = getAllBlogs().size();
+    //     blogmodelobj.set_id("BN"+ String.format("%03d",(size+1)) );
+    //     return blogrepoobject.save(blogmodelobj);
+    // }
 
    @Override
    public List<BlogModel>getAllBlogs(){
-    return blogrepoobject.findAll(Sort.by(Direction.DESC, "date"));
-    // return blogrepoobject.findAll();
+    // return blogrepoobject.findAll(Sort.by(Direction.DESC, "date"));
+     return blogrepoobject.findAll();
    }
 
    
@@ -75,19 +75,11 @@ public class BlogServiceImpl implements BlogService{
 }
 // 
 
-  @Override
-  public BlogModel fetchBlogById(String id) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+ 
 
-    // @Override
-    // public Object findById(String id) {
-    //   // TODO Auto-generated method stub
-    //   return null;
-    // }
+    
     @Override
-    public BlogModel addblog(BlogModel blogmodelobj)
+    public BlogModel addblog(BlogModel blogmodelobj)   // post blog
     {
       PreviousId PreviousIdModel = previousidrepositoryobject.findByType( "blog");
       Integer PreviousBlogId = PreviousIdModel.getPreviousId();
@@ -101,10 +93,30 @@ public class BlogServiceImpl implements BlogService{
      PreviousIdModel.setPreviousId(PreviousBlogId);
      previousidrepositoryobject.save(PreviousIdModel);
      blogmodelobj.setDate(new Date());
-     blogmodelobj.setLike(true);
+     
      return blogrepoobject.save(blogmodelobj);
+    }
+    @Override
+
+    public BlogModel getLikes(String blogId, String userId){    //get like
+      BlogModel blogmodelobj =blogrepoobject.findById(blogId).get();
+      List<String> likes = blogmodelobj.getLikes();
+      likes.add(userId);
+      blogmodelobj.setLikes(likes);
+      return blogrepoobject.save(blogmodelobj);
+    }
+    @Override
+
+    public BlogModel removeLikes(String blogId, String userId){ // remove like
+      BlogModel blogmodelobj =blogrepoobject.findById(blogId).get();
+      List<String> likes = blogmodelobj.getLikes();
+      likes.remove(userId);
+      blogmodelobj.setLikes(likes);
+      return blogrepoobject.save(blogmodelobj);
+    }
+   
+
     }
     
 
 
-}

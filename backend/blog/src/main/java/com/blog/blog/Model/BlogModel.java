@@ -1,6 +1,7 @@
 
 package com.blog.blog.Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,16 +25,14 @@ public class BlogModel {
     @NotBlank
     private String username;
     // private Date date = new Date();
-    private boolean like;
-    private boolean unlike;
-    private List<String> likedUsers;
-    private List<String> unlikedUsers;
+    // private boolean like;
+    // private boolean unlike;
+    // private List<String> likedUsers;
+    // private List<String> unlikedUsers;
     private String setId;
-    private Date date;
-    
-    
-    
-      
+    private Date date;  
+    private List<String> likes = new ArrayList<String>();
+
 }
 
 
