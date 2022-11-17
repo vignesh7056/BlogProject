@@ -27,10 +27,10 @@ public class BlogController {
        return blogserviceobj.getAllBlogs();
     }
    
-    @PostMapping("/create")
-    public BlogModel make(@RequestBody BlogModel blogmodelobj){
-    return blogserviceobj.createBlog(blogmodelobj);
-}
+//     @PostMapping("/create")
+//     public BlogModel make(@RequestBody BlogModel blogmodelobj){
+//     return blogserviceobj.createBlog(blogmodelobj);
+// }
 
     @PatchMapping("/update")
     public BlogModel updateBlog(@RequestBody BlogModel blogmodelobj){
@@ -63,4 +63,12 @@ public class BlogController {
         return blogserviceobj.addblog(blogmodelobj);
         
     }
-}
+    @PatchMapping("/like/{blogId}/{userId}")
+    public BlogModel getLikes(@PathVariable("blogId") String blogId, @PathVariable("userId") String userId){
+   return blogserviceobj.getLikes(blogId, userId);
+    }
+    @PatchMapping("/unlike/{blogId}/{userId}")
+    public BlogModel removeLikes(@PathVariable("blogId") String blogId, @PathVariable("userId") String userId){
+   return blogserviceobj.removeLikes(blogId, userId);
+    }
+    }

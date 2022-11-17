@@ -22,7 +22,7 @@ function Addblogpage() {
         const data = {
           title, content, username
         };
-console.log(data)
+        console.log(data)
         axios({
           method: "post",
           url: "/blog/add",

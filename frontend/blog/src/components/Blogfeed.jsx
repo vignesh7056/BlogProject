@@ -5,50 +5,51 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { LoginContext } from "../AppContext";
 
 import axios from "../Axios";
+import Component from './Component';
 function Blogfeed() {
   const [blog, setblogs] = useState([]);
+  // const [like, setlike] = useState(false);
+  // useEffect(()=>{
+  //   data.likes.forEach(user =>{
+  //     if(user === userId){
+  //        setlike(true);
+  //     }
+  //   })
+  // },[])
+  // function getlike(){
+  //   axios.patch('/blog/like/${data.id}/${userId}').then((response) =>{
+  //     if (response.data){
+  //       setlike(true);
+  //       setupdate()
+  //   }
+  //   })
+  // }
 
-  
   useEffect(() => {
     axios
       .get("/blog")
       .then((response) => setblogs(response.data.reverse()))
       .catch((err) => console.log("Error " + err));
-  },[]);
+  }, []);
+  // const bloglike =({data}) => {
+  //   const[like, setlike]= useState(data.like);
+  //   function changelike(){
+  //     setlike(!like);
+  //   }
+  // }
 
 
 
   return (
-   
-       <div className="cards-container">
-        {blog.map((blogs) => {
-          
-          return (<> 
-          <ListGroup.Item>
-            <Card style={{ width: '80rem' }}>
-             
-              <Card.Body>
-                <Card.Title>{blogs.title}</Card.Title>
-                <Card.Text>
-                  {blogs.content}
-                </Card.Text>
-              </Card.Body>
-              <ListGroup className="list-group-flush">
-                <ListGroup.Item>author :{blogs.username}</ListGroup.Item>
-                <ListGroup.Item>Date :{blogs.date}</ListGroup.Item> 
-              </ListGroup>
-              <Card.Body>
-              <Button variant="success">Like</Button>{' '}
-              </Card.Body>
-            </Card>
-            </ListGroup.Item>
-            
-             </>);
-        })}
-      </div>
-  
+
+    <div className="cards-container">
+      {blog.map((blogs) => {
+        return (<Component blogs={blogs} />);
+      })}
+    </div>
+
   );
-  
+
 }
 
 export default Blogfeed;

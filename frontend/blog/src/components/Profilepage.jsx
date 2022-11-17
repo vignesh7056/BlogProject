@@ -16,7 +16,7 @@ function Profilepage() {
     
     axios
       .get(`/blog/${username}`)
-      .then((response) => setblogs(response.data))
+      .then((response) => setblogs(response.data.reverse()))
       .catch((err) => console.log("Error " + err));
       console.log(blog);
   },[refresh]);
@@ -61,7 +61,7 @@ function Profilepage() {
                     <ListGroup.Item>Id : {blogs._id}</ListGroup.Item>
                   </ListGroup>
                   <Card.Body>
-                    <Button variant="success">LIKE</Button>{' '}
+                    {/* <Button variant="success">LIKE</Button>{' '} */}
                    {/* <Link to={`/Editblogpage/${blogs._id}`}> <Button variant="success">EDIT</Button>{' '}</Link> */}
                    {console.log(blogs._id,"////if")}
                     <Button variant="success"onClick={() => del(blogs._id)}>DELETE</Button>{' '}
