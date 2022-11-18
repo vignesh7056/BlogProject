@@ -10,16 +10,13 @@ import com.blog.blog.Model.PreviousId;
 import com.blog.blog.Repository.BlogRepository;
 import com.blog.blog.Repository.PreviousIdRepository;
 @Component
-
 public class BlogServiceImpl implements BlogService{
-  
     @Autowired
     private BlogRepository blogrepoobject;
     @Autowired
     private PreviousIdRepository previousidrepositoryobject;
    @Override
    public List<BlogModel>getAllBlogs(){       // /blog
-    // return blogrepoobject.findAll(Sort.by(Direction.DESC, "date"));
      return blogrepoobject.findAll();
    }
     @Override
@@ -51,11 +48,6 @@ public class BlogServiceImpl implements BlogService{
 
     return optionalBlog.get();
   }
-
-
- 
-
-    
     @Override
     public BlogModel addblog(BlogModel blogmodelobj)   // post blog
     {
@@ -93,7 +85,6 @@ public class BlogServiceImpl implements BlogService{
       return blogrepoobject.save(blogmodelobj);
     }
    
-
     }
     
 

@@ -27,22 +27,15 @@ public class BlogController {
        return blogserviceobj.getAllBlogs();
     }
    
-//     @PostMapping("/create")
-//     public BlogModel make(@RequestBody BlogModel blogmodelobj){
-//     return blogserviceobj.createBlog(blogmodelobj);
-// }
-
     @PatchMapping("/update")       // update a blog(edit blog)
     public BlogModel updateBlog(@RequestBody BlogModel blogmodelobj){
         return blogserviceobj.updateBlog(blogmodelobj);
     } 
 
-
     @GetMapping("/{username}")  // get blog by username
     public List<BlogModel> getBlogsByUsername(@PathVariable String username){
        return blogserviceobj.getBlogByUsername(username); 
     }
-
 
     @DeleteMapping("/id/{id}")     //deleteblog
     public void deleteById(@PathVariable String id){
