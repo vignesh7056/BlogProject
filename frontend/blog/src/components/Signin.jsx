@@ -1,7 +1,4 @@
 
-//import Navbar from './Navbar'
-
-
 import { MDBCol, MDBRow, } from 'mdb-react-ui-kit';
 
 import axios from '../Axios';
@@ -127,14 +124,12 @@ function Signin({setrefresh}) {
         <a href={'/Signup'}>i dont have an account</a>
       </p>
       
-      {/* <p className="forgot-password text-right">
-        Forgot <a href="">password?</a>
-      </p> */}
+
     </form>
-     {/* </MDBContainer> */}
+    
      </MDBCol>
      </MDBRow>
-    {/* </div> */}
+   
     </div>
     
  )

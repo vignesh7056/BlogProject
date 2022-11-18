@@ -6,16 +6,12 @@ import { useEffect } from "react";
 
 
 function Editblogpage(props) {
-    const { id } = useParams();
-    // const iid = props.data;
+    const { id } = useParams();    
     const navigate= useNavigate();
     console.log(id);
     const [blog, setblog] = useState();
-    // const [title, settitle]= useform();
-    // const[content,setcontent]= useform();
     const titleRef = useRef();
     const bodyRef = useRef();
-    // const [id] = useParams();
     useEffect(() => {
         axios
             .get(`/blog/blogdata/id/${id}`)
@@ -84,31 +80,7 @@ function Editblogpage(props) {
                 </form>
             </div>
         </>
-        // <>
-        //     <div>
-        //         <div>Post blog</div>
-        //         <form className="form-container"
-        //         //  onSubmit={handleSubmit}
-        //         >
-        //             <div class="form-group">
-        //                 <label for="exampleFormControlInput1">Title</label>
-        //                 <input type="text" class="form-control" id="title" placeholder="Title" required={true}
-        //                 //   ref={titleRef}
-        //                 />
-        //             </div>
-        //             <div class="form-group">
-        //                 <label for="exampleFormControlTextarea1">body</label>
-        //                 <textarea class="form-control" id="body" rows="3" required={true}
-        //                 //   ref={bodyRef}
-        //                 ></textarea>
-        //             </div>
-        //             <div><button type="submit" className="btn btn-primary">
-        //                 POST
-        //             </button></div>
-
-        //         </form>
-        //     </div>
-        // </>
+        
     );
 }
 export default Editblogpage;

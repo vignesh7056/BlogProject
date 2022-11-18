@@ -20,8 +20,7 @@ const [refresh, setrefresh]= useState(false);
     <BrowserRouter>
       <Mynavbar/>
       <Routes>
-        {/* <Route path="/" element={<Layout />}> */}
-           {/* <Route index element={<Home />} /> */}
+     
            <Route path="/" element={<Home />} />
           <Route path="signin" element={<Signin setrefresh={() => setrefresh(!refresh)}/>} />
           <Route path="signup" element={<SignUp />} />
@@ -30,12 +29,9 @@ const [refresh, setrefresh]= useState(false);
           <Route path="Profilepage" element={<Profilepage />} />
           <Route path="Admin" element={<Clientpage />} />
           <Route path="clientpage" element={<Clientpage />} />
-           {/* <Route path="Editblogpage/:id" element={<Editblogpage />} />  */}
+          
           <Route path="Editblogpage/:id" element={<Editblogpage />} />
-          {/* <Route path="blog" element={<Blog />} /> */}
-          {/* <Route path="profile" element={<Profile />} /> */}
-          {/* <Route path="addblog" element={<Addblog />} /> */}
-          {/* <Route path="*" element={<NoPage />} /> */}
+         
       </Routes>
     </BrowserRouter>
   );

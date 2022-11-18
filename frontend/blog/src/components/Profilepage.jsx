@@ -2,18 +2,15 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from '../Axios';
 import { useState } from 'react';
-
 function Profilepage() {
   const [blog, setblogs] = useState([]);
   const username = localStorage.getItem("userName");
  const [refresh, setrefresh] = useState(false);
-  useEffect(() => {
-    
+  useEffect(() => { 
     axios
       .get(`/blog/${username}`)
       .then((response) => setblogs(response.data.reverse()))
@@ -22,17 +19,11 @@ function Profilepage() {
   },[refresh]);
   const navigate = useNavigate();
   const edit = (id) => {
-    //  navigate to /addblogpage
     navigate(`/Editblogpage/${id}`);
   };
-
   const del = (id) => {
     axios.delete(`/blog/id/${id}`).then((response) => setrefresh(true))
   }
-  //  const edit = (_id)=> {
-  //    axios.edit('/blog/${id}').then((response) => console.log(response))
-  //  }
-
   return (
     <>
    <Link to={`/Addblogpage`}> <Button variant="success">POST BLOG</Button>{' '}</Link>
@@ -42,9 +33,7 @@ function Profilepage() {
       {blog.map((blogs) => {
         return (
           <>
-            {/* <Editblogpage
-            data={"Vignesh"}/> */}
-
+           
             <ListGroup>
               <ListGroup.Item>
                 <Card style={{ width: '80rem' }}>
@@ -61,11 +50,8 @@ function Profilepage() {
                     <ListGroup.Item>Id : {blogs._id}</ListGroup.Item>
                   </ListGroup>
                   <Card.Body>
-                    {/* <Button variant="success">LIKE</Button>{' '} */}
-                   {/* <Link to={`/Editblogpage/${blogs._id}`}> <Button variant="success">EDIT</Button>{' '}</Link> */}
                    {console.log(blogs._id,"////if")}
                     <Button variant="success"onClick={() => del(blogs._id)}>DELETE</Button>{' '}
-                    {/* <Button variant="success"onClick={() => edit(<Editblogpage data={blogs._id}/>)}>EDIT</Button>{' '} */}
                     <Button variant="success"onClick={() => edit(blogs._id)}>EDIT</Button>{' '}
                   </Card.Body>
                 </Card>
@@ -76,5 +62,4 @@ function Profilepage() {
     </>
   )
 }
-
 export default Profilepage;

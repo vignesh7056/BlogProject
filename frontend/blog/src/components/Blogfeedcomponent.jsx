@@ -4,11 +4,8 @@ import Button from 'react-bootstrap/Button';
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { LoginContext } from "../AppContext";
 import axios from '../Axios';
-
-function Component({ blogs }) {
-
+function Blogfeedcomponent({ blogs }) {
     const [like, setLike] = useState(false);
-
     const userId = localStorage.getItem("userId");
     
    useEffect(()=>{
@@ -57,13 +54,9 @@ function Component({ blogs }) {
                 ):
                 <i className="bi bi-hand-thumbs-up" onClick={getlike}></i>
                 } 
-
-                    {/* <i class="bi bi-hand-thumbs-up-fill"></i> */}
-                    {/* <Button variant="success">Like</Button>{' '} */}
                 </Card.Body>
             </Card>
         </ListGroup.Item>
     )
 }
-
-export default Component
+export default Blogfeedcomponent

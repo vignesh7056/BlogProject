@@ -7,7 +7,7 @@ import React from 'react'
 function Homesyle() {
   return (
     <div>
-
+      
     </div>
   )
 }
