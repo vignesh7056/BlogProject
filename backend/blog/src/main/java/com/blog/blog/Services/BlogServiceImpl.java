@@ -1,16 +1,10 @@
 package com.blog.blog.Services;
 
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
-
-
 import com.blog.blog.Model.BlogModel;
 import com.blog.blog.Model.PreviousId;
 import com.blog.blog.Repository.BlogRepository;
@@ -23,44 +17,29 @@ public class BlogServiceImpl implements BlogService{
     private BlogRepository blogrepoobject;
     @Autowired
     private PreviousIdRepository previousidrepositoryobject;
-
-    // @Override
-    // public BlogModel createBlog(BlogModel blogmodelobj){
-    //     int size = getAllBlogs().size();
-    //     blogmodelobj.set_id("BN"+ String.format("%03d",(size+1)) );
-    //     return blogrepoobject.save(blogmodelobj);
-    // }
-
    @Override
-   public List<BlogModel>getAllBlogs(){
+   public List<BlogModel>getAllBlogs(){       // /blog
     // return blogrepoobject.findAll(Sort.by(Direction.DESC, "date"));
      return blogrepoobject.findAll();
    }
-
-   
-
     @Override
-    public BlogModel updateBlog(BlogModel blogmodelobj){
+    public BlogModel updateBlog(BlogModel blogmodelobj){  //edit blog
         BlogModel blog = getBlogById(blogmodelobj.get_id());
         blog.setTitle(blogmodelobj.getTitle());
         blog.setContent(blogmodelobj.getContent());
         blog.setUsername(blogmodelobj.getUsername());
         return blogrepoobject.save(blog);
     }
-
-    @Override
+    @Override              // get blog by username
     public List<BlogModel> getBlogByUsername(String username) {
       return blogrepoobject.findByUsername(username);
     }
-    
-    
      @Override
      public BlogModel getBlogById(String id) {
         return blogrepoobject.findById(id).get();
-       // return blogrepoobject.findById(id).get();
     }
 
-    @Override
+    @Override           // deleteblog
     public void deleteById(String id){
       blogrepoobject.deleteById(id);
   }
@@ -71,9 +50,8 @@ public class BlogServiceImpl implements BlogService{
     return null;
 
     return optionalBlog.get();
-    //return optionalBlog.get();
-}
-// 
+  }
+
 
  
 
@@ -97,7 +75,7 @@ public class BlogServiceImpl implements BlogService{
      return blogrepoobject.save(blogmodelobj);
     }
     @Override
-
+ /// like a post
     public BlogModel getLikes(String blogId, String userId){    //get like
       BlogModel blogmodelobj =blogrepoobject.findById(blogId).get();
       List<String> likes = blogmodelobj.getLikes();
@@ -106,7 +84,7 @@ public class BlogServiceImpl implements BlogService{
       return blogrepoobject.save(blogmodelobj);
     }
     @Override
-
+// dislike a post
     public BlogModel removeLikes(String blogId, String userId){ // remove like
       BlogModel blogmodelobj =blogrepoobject.findById(blogId).get();
       List<String> likes = blogmodelobj.getLikes();

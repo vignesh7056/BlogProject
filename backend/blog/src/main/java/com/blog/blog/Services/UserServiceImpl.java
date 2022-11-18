@@ -24,18 +24,7 @@ public class UserServiceImpl implements UserService {
         return userrepositoryobj.findAll();
     }
 
-    // public boolean signin(String email, String password){
-    //     boolean valid = false;
-    //     if(email!=""){
-    //         List<UserModel> user = userrepositoryobj.findByEmail(email);
-    //         if(user.size()>0){
-    //             if(user.stream().findFirst().get().getPassword().equals(password)){
-    //                 valid=true;
-    //             }
-    //         }    
-    //     }
-    //     return valid;
-    // }
+
     public UserModel signin(UserModel user) {
         UserModel userobj = userrepositoryobj.findByEmailAndPassword(user.getEmail(), user.getPassword());
         if (userobj == null)
@@ -43,18 +32,10 @@ public class UserServiceImpl implements UserService {
         return userobj;
     }
 
-
-
-
-
-
-
-
     @Override
      public UserModel create(UserModel user) {
         return userrepositoryobj.save(user);
     }
-
     
      @Override
      public UserModel findById(String id) {
@@ -79,9 +60,7 @@ public class UserServiceImpl implements UserService {
     public List<UserModel> findAll() {
         
         return userrepositoryobj.findAll();
-    }
-
-    
+    }  
     
 }
 

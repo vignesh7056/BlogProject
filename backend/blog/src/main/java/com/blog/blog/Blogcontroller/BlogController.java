@@ -32,42 +32,42 @@ public class BlogController {
 //     return blogserviceobj.createBlog(blogmodelobj);
 // }
 
-    @PatchMapping("/update")
+    @PatchMapping("/update")       // update a blog(edit blog)
     public BlogModel updateBlog(@RequestBody BlogModel blogmodelobj){
         return blogserviceobj.updateBlog(blogmodelobj);
     } 
 
 
-    @GetMapping("/{username}")
+    @GetMapping("/{username}")  // get blog by username
     public List<BlogModel> getBlogsByUsername(@PathVariable String username){
        return blogserviceobj.getBlogByUsername(username); 
     }
 
 
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/id/{id}")     //deleteblog
     public void deleteById(@PathVariable String id){
         blogserviceobj.deleteById(id);
     }
     /////////
-    // @GetMapping("/blogdata/{id}")
+    // @GetMapping("/blogdata/{id}")      //unwanted
     // public BlogModel getBlogById(@PathVariable String id ){
     //     return blogserviceobj.getBlogById(id);
     // }
-    @GetMapping("/blogdata/id/{id}")
+    @GetMapping("/blogdata/id/{id}")   // find blog by id 
     public BlogModel findblog(@PathVariable String id){
         // System.out.println("fejvnjekvfen " + id);
       return blogserviceobj.findblog(id);
     }
-    @PostMapping("/add")
+    @PostMapping("/add")     //add blog page(post a blog)
     public BlogModel addblog(@RequestBody BlogModel blogmodelobj){
         return blogserviceobj.addblog(blogmodelobj);
         
     }
-    @PatchMapping("/like/{blogId}/{userId}")
+    @PatchMapping("/like/{blogId}/{userId}")    // like a post
     public BlogModel getLikes(@PathVariable("blogId") String blogId, @PathVariable("userId") String userId){
    return blogserviceobj.getLikes(blogId, userId);
     }
-    @PatchMapping("/unlike/{blogId}/{userId}")
+    @PatchMapping("/unlike/{blogId}/{userId}")   // dislike a post
     public BlogModel removeLikes(@PathVariable("blogId") String blogId, @PathVariable("userId") String userId){
    return blogserviceobj.removeLikes(blogId, userId);
     }
